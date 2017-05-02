@@ -41,13 +41,17 @@ export default class Cal extends Component {
   _keyboardDidHide() {
     alert('Keyboard Hidden');
   }
-
+  
+  componentWillMount(){
+    console.log('component Will Mount');
+  }
   componentDidMount() {
     this.getSceneTransition();
   }
 
   async getSceneTransition() {
     try {
+      console.log('debug load tip');
       let TIP_PERCENTAGE_0 = await AsyncStorage.getItem("TIP_PERCENTAGE_0") || '10%';
       let TIP_PERCENTAGE_1 = await AsyncStorage.getItem("TIP_PERCENTAGE_1") || '15%';
       let TIP_PERCENTAGE_2 = await AsyncStorage.getItem("TIP_PERCENTAGE_2") || '50%';
@@ -86,9 +90,12 @@ export default class Cal extends Component {
       tipAmount: parseFloat(bill * percent).toFixed(2)
     })
   }
-  segmentValues() {
-    console.log("statement " + this.state.TIP_PERCENTAGE_0);
-    return [this.state.TIP_PERCENTAGE_0, this.state.TIP_PERCENTAGE_1, this.state.TIP_PERCENTAGE_2];
+   segmentValues() {
+    var _TIP_PERCENTAGE_0 = this.state.TIP_PERCENTAGE_0 || '10%';
+    var _TIP_PERCENTAGE_1 = this.state.TIP_PERCENTAGE_1 || '15%';
+    var _TIP_PERCENTAGE_2 = this.state.TIP_PERCENTAGE_2 || '50%';
+
+    return [_TIP_PERCENTAGE_0, _TIP_PERCENTAGE_1, _TIP_PERCENTAGE_2];
   }
   render() {
     return (

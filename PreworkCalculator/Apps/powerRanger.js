@@ -51,14 +51,38 @@ export default class PowerRanger extends Component {
             console.log("statement " + this.state.TIP_PERCENTAGE_0);
             // Store value to State
             this.setState({
-                SCENE_SELECTED: SCENE_SELECTED,
+                sceneConfig: SCENE_SELECTED,
             });
         } catch (error) {
             console.log("Hmm, something when wrong when get data..." + error);
         }
     }
     configureScene(route, routeStack) {
-        //@Todo, change to scene transition from Asynstorage vale
+        //@Todo, change to scene transition from Asynstorage value
+        $scene = this.state.sceneConfig;
+        switch ($scene) {
+            case 'FloatFromRight':
+                return Navigator.SceneConfigs.FloatFromRight;
+                break;
+            case 'FloatFromLeft':
+                return Navigator.SceneConfigs.FloatFromLeft;
+                break;
+            case 'FloatFromBottom':
+                return Navigator.SceneConfigs.FloatFromBottom;
+                break;
+            case 'FloatFromBottomAndroid':
+                return Navigator.SceneConfigs.FloatFromBottomAndroid;
+                break;
+            case 'SwipeFromLeft':
+                return Navigator.SceneConfigs.SwipeFromLeft;
+                break;
+            case 'HorizontalSwipeJump':
+                return Navigator.SceneConfigs.HorizontalSwipeJump;
+                break;
+            case 'HorizontalSwipeJumpFromRight':
+                return Navigator.SceneConfigs.HorizontalSwipeJumpFromRight;
+                break;
+        }
         return Navigator.SceneConfigs.FloatFromRight;
     }
     render() {
@@ -74,7 +98,7 @@ export default class PowerRanger extends Component {
                     return Navigator.SceneConfigs.FloatFromRight;
                 }}
                 navigationBar={CustomNavBar}
-               // configureScene={this.configureScene.bind(this)}
+                configureScene={this.configureScene.bind(this)}
             />
         );
     }
