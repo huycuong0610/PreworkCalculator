@@ -81,7 +81,6 @@ export default class Settings extends Component {
       if (!index && index != 0) {
         index = this.state.segmentSelectedIndex;
       }
-      console.log("set tip percentage " + index, value);
       await AsyncStorage.setItem('TIP_PERCENTAGE_' + index, value);
     }
 

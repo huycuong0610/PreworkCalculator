@@ -22,25 +22,6 @@ export default class Cal extends Component {
       tipAmount: 0,
     };
   }
-  async componentWillMount() {
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
-
-    console.log('test');
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  _keyboardDidShow() {
-    alert('Keyboard Shown');
-  }
-
-  _keyboardDidHide() {
-    alert('Keyboard Hidden');
-  }
   
   componentWillMount(){
     console.log('component Will Mount');

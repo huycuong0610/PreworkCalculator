@@ -20,9 +20,6 @@ var SCENE_SELECTED = '@AsyncStorageAnimation:key';
 export default class PowerRanger extends Component {
     constructor() {
         super()
-        this.state = {
-            sceneTransition: 'SwipeFromLeft'
-        };
 
     }
     // this method will be called when scene loaded
@@ -42,6 +39,9 @@ export default class PowerRanger extends Component {
                 );
                 break;
             default:
+                return (
+                    <Calculator navigator={navigator} />
+                );
                 break;
         }
     }
@@ -57,8 +57,9 @@ export default class PowerRanger extends Component {
             console.log("Hmm, something when wrong when get data..." + error);
         }
     }
-    configureScene(route, routeStack) {
+    async configureScene(route, routeStack) {
         //@Todo, change to scene transition from Asynstorage value
+        let SCENE_SELECTED = await AsyncStorage.getItem(SCENE_SELECTED) || 'FloatFromRight';
         $scene = this.state.sceneConfig;
         console.log('configureScene:' + $scene);
         switch ($scene) {
@@ -92,6 +93,12 @@ export default class PowerRanger extends Component {
             <Navigator
                 initialRoute={{ id: 'CalculatorPage' }}
                 renderScene={this.renderScene.bind(this)}
+                configureScene={(route) => {
+                    if (route.sceneConfig) {
+                        return route.sceneConfig;
+                    }
+                    return Navigator.SceneConfigs.FloatFromRight;
+                }}
                 navigationBar={CustomNavBar}
                 configureScene={this.configureScene.bind(this)}
             />
