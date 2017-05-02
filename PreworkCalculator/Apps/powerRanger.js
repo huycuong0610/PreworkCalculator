@@ -48,7 +48,7 @@ export default class PowerRanger extends Component {
     async getSceneTransition() {
         try {
             let SCENE_SELECTED = await AsyncStorage.getItem(SCENE_SELECTED) || 'FloatFromRight';
-            console.log("statement " + this.state.TIP_PERCENTAGE_0);
+            console.log("Scene " + SCENE_SELECTED);
             // Store value to State
             this.setState({
                 sceneConfig: SCENE_SELECTED,
@@ -60,6 +60,7 @@ export default class PowerRanger extends Component {
     configureScene(route, routeStack) {
         //@Todo, change to scene transition from Asynstorage value
         $scene = this.state.sceneConfig;
+        console.log('configureScene:' + $scene);
         switch ($scene) {
             case 'FloatFromRight':
                 return Navigator.SceneConfigs.FloatFromRight;
@@ -91,12 +92,6 @@ export default class PowerRanger extends Component {
             <Navigator
                 initialRoute={{ id: 'CalculatorPage' }}
                 renderScene={this.renderScene.bind(this)}
-                configureScene={(route) => {
-                    if (route.sceneConfig) {
-                        return route.sceneConfig;
-                    }
-                    return Navigator.SceneConfigs.FloatFromRight;
-                }}
                 navigationBar={CustomNavBar}
                 configureScene={this.configureScene.bind(this)}
             />
